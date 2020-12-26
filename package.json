@@ -28,5 +28,13 @@
     "prop-types": "^15.7.2",
     "react-collapsible": "^2.8.1",
     "reactstrap": "^8.7.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyGreenhaw/react-weather-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AndyGreenhaw/react-weather-app/issues"
+  },
+  "homepage": "https://github.com/AndyGreenhaw/react-weather-app#readme"
 }

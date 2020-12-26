@@ -1,6 +1,7 @@
 export default {
 
     getForecastArray: function (resp){
+        // console.log(resp)
 
         let forecastArray = [];
         let todayFullDate = new Date();
@@ -8,7 +9,7 @@ export default {
         // NEW WEATHER OBJECT MODEL
         for (var i=0; i<5;i++){
 
-        let dayName;
+            let dayName;
 
             if((todayFullDate.getDay()+1+i)<7){
 
@@ -47,6 +48,7 @@ export default {
             }
 
             let updatedForecastObj = {
+                _id: (i+1),
                 dayDate: dayName,
                 forecastIcon: (require('../images/' + resp.data.list[i].weather[0].icon + '@2x.png')),
                 temp: resp.data.list[i].main.temp,
@@ -60,7 +62,7 @@ export default {
             forecastArray.push(updatedForecastObj)
         }
 
-        console.log(forecastArray)
+        // console.log(forecastArray)
 
         return forecastArray
     }

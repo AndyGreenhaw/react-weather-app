@@ -21,7 +21,8 @@ export default {
             method: 'GET',
             url: cityCoordinates
         })
-    }
+    },
 
+    
 }
 

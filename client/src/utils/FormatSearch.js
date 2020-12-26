@@ -1,9 +1,9 @@
 export default {
 
     getURL: function (searchInput){
-        console.log(searchInput)
+        // console.log(searchInput)
 
-        let ajaxRequest;
+        let ajaxRequest; 
         let apiURLObject;
         
     if (!isNaN(searchInput)) {
@@ -16,12 +16,14 @@ export default {
             let ajaxCity = (searchInput.split(','))[0]
             let ajaxState = ((searchInput.split(','))[1]).toLowerCase().trim()
     
-            console.log(ajaxCity + "," + ajaxState)
-            console.log(ajaxState)
-    
+            // console.log(ajaxCity + "," + ajaxState)
+            // console.log(ajaxState)
+            console.log("read")
+
             switch(ajaxState){
                 case "al":
                     ajaxRequest = ajaxCity + ",01,840";
+
                     apiURLObject = formatURLs(ajaxRequest)
                     break;
                 case "ak":
@@ -78,6 +80,7 @@ export default {
                     break;
                 case "ks":
                     ajaxRequest = (ajaxCity + ",20,840");
+                    console.log("kansas")
                     break;
                 case "ky":
                     ajaxRequest = ajaxCity + ",21,840";
@@ -105,6 +108,7 @@ export default {
                     break;
                 case "mo":
                     ajaxRequest = ajaxCity + ",29,840";
+                    console.log("mizzou")
                     break;
                 case "mt":
                     ajaxRequest = ajaxCity + ",30,840";
@@ -198,7 +202,7 @@ export default {
         // FORMATTING URLS FOR CITY ENTRIES
         function formatURLs(ajaxRequest){
 
-            console.log(ajaxRequest)
+            // console.log(ajaxRequest)
             // PRIMARY URL
             const queryURL = "https://api.openweathermap.org/data/2.5/weather?q="
                 + ajaxRequest 

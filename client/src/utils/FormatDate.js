@@ -1,10 +1,8 @@
 export default {
 
     getDate: function (){
-        console.log("Reading Day Formatter")
 
         var todayFullDate = new Date();
-        console.log(todayFullDate)
 
         var dd = todayFullDate.getDate();
         var mm = todayFullDate.getMonth();
@@ -38,10 +36,10 @@ export default {
         // Format Months
         switch(mm) {
             case 0:
-                mm = "Jan";
+                mm = "January";
                 break;
             case 1:
-                mm = "Feb";
+                mm = "February";
                 break;
             case 2:
                 mm = "March";
@@ -59,23 +57,23 @@ export default {
                 mm = "July";
                 break;
             case 7:
-                mm = "Aug";
+                mm = "August";
                 break;
             case 8:
-                mm = "Sept";
+                mm = "September";
                 break;
             case 9:
-                mm = "Oct";
+                mm = "October";
                 break;
             case 10:
-                mm = "Nov";
+                mm = "November";
                 break;
             case 11:
-                mm = "Dec";
+                mm = "December";
         } 
 
     const todayDisplay = (dayName+', '+mm+' '+dd+', '+yyyy).toString();
-    console.log(todayDisplay)
+    // console.log(todayDisplay)
     return todayDisplay;
     }
 

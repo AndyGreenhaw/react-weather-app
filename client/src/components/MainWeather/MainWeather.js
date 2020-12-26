@@ -6,7 +6,7 @@ function MainWeather(props){
     return(
         <div className="main">
             <div className="row mainCityNameBox">
-                <h1 className="mainCityText">{props.cityName}</h1>
+                <h1 className="mainCityText">{props.locationName}</h1>
             </div>
             <div className="row mainDateBox">
                 <h2 className="mainDateText">{props.todayDate}</h2>

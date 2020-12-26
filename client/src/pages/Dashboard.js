@@ -4,15 +4,14 @@ import { Collapse } from 'reactstrap';
 //IMPORT PAGES
 import MainWeather from "../components/MainWeather/MainWeather.js"
 import ForecastWeather from "../components/ForecastWeather/ForecastWeather.js"
-// import SearchSection from "../components/SearchSection/SearchSection.js"
 
 // IMPORT FUNCTIONS
 import API from "../utils/API.js"
-import FormatSearch from '../utils/FormatSearch'
-import FormatTodayWeather from "../utils/FormatTodayWeather"
+import FormatTodayWeather from "../utils/FormatWeather"
 import FormatForecast from '../utils/FormatForecast'
-// import FormatDate from '../utils/FormatDay'
+import FormatLocation from '../utils/FormatLocation'
 
+// IMPORT CSS
 import '../index.css'
 
 // DASHBOARD STATE FUNCTIONS START
@@ -29,7 +28,7 @@ function Dashboard() {
     // USE EFFECT: LOAD DENVER
     // useEffect(() => {
     //     toggle()
-    // }, [collapse])
+    // }, [collapse])  
       
     // HANDLE INPUT CHANGE
     function handleInputChange(e) {
@@ -40,29 +39,38 @@ function Dashboard() {
     // SUBMIT SEARCH
     function submitSearch (e) {
 
-        // FORMAT URL - See ../Utils/FOrmatSearch
-        const apiURLObject = FormatSearch.getURL(searchInput)
-        const queryTodayURL = apiURLObject.URL_Today
-        const queryForecastURL = apiURLObject.URL_Forecast
-    
-        // API REQUEST - PRIMARY WEATHER 
-        API.getWeather(queryTodayURL).then( resp => {
-            // FORMAT WEATHER INTO OBJECT
-            const newWeatherObj = FormatTodayWeather.getTodayWeather(resp)
-            return(newWeatherObj)
-        }).then(newWeatherObj => {
-            // SET WEATHER
-            setWeatherObject(newWeatherObj)
-        })
+        FormatLocation.getLocation(searchInput).then(locationObj => {
 
-        // API REQUEST - FORECAST  
-        API.getForecast(queryForecastURL).then( resp => {
-            // FORMAT FORECAST INTO OBJECT
-            const forecastArray = FormatForecast.getForecastArray(resp)
-            return forecastArray
-        }).then(forecastArray => {
-            // SET FORECAST
-            setForecastObject(forecastArray)
+            const formattedAddress = locationObj.formattedAddress
+            const ajaxRequestURL = locationObj.ajaxRequestURL
+            const ajaxForecastURL = locationObj.ajaxForecastURL
+
+            // API REQUEST - PRIMARY WEATHER 
+            API.getWeather(ajaxRequestURL).then(resp => {
+
+                // FORMAT WEATHER DATA INTO OBJECT
+                const newWeatherObj = FormatTodayWeather.getTodayWeather(resp)
+                return(newWeatherObj)
+
+            }).then( newWeatherObj => {
+
+                // ADD CITY/STATE NAME TO WEATHER OBJECT
+                newWeatherObj.formattedAddress = formattedAddress
+
+                // SET WEATHER
+                setWeatherObject(newWeatherObj)
+            })
+
+            // API REQUEST - FORECAST  
+            API.getForecast(ajaxForecastURL).then( resp => {
+                // FORMAT FORECAST INTO OBJECT
+                const forecastArray = FormatForecast.getForecastArray(resp)
+                return forecastArray
+            }).then(forecastArray => {
+                // SET FORECAST
+                setForecastObject(forecastArray)
+            })
+
         })
         
     }
@@ -93,7 +101,7 @@ function Dashboard() {
                 <main className="col-md-12">
                     
                         <MainWeather
-                            cityName={weatherObj.cityName}
+                            locationName={weatherObj.formattedAddress}
                             todayDate={weatherObj.todayDate}
                             iconImg={weatherObj.iconImg}
                             temp={weatherObj.temp}

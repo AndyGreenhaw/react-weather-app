@@ -1,7 +1,8 @@
 export default {
 
     getForecastArray: function (resp){
-        // console.log(resp)
+        console.log("FORECAST DATA:")
+        console.log(resp)
 
         let forecastArray = [];
         let todayFullDate = new Date();
@@ -47,16 +48,24 @@ export default {
                 }
             }
 
+            const forecastIcon = (require('../images/' + resp.data.daily[i].weather[0].icon + '@2x.png'))
+            const temp = resp.data.daily[i].day
+            const tempMax = resp.data.daily[i].max
+            const tempMin =  resp.data.daily[i].min
+            const humidity = resp.data.daily[i].humidity
+            const wind_Direction = resp.data.daily[i].wind_deg
+            const wind_Speed = resp.data.daily[i].wind_speed
+
             let updatedForecastObj = {
                 _id: (i+1),
                 dayDate: dayName,
-                forecastIcon: (require('../images/' + resp.data.list[i].weather[0].icon + '@2x.png')),
-                temp: resp.data.list[i].main.temp,
-                temp_max: resp.data.list[i].main.temp_max,
-                temp_min: resp.data.list[i].main.temp_min,
-                humidity: resp.data.list[i].main.humidity,
-                wind_Direction: resp.data.list[i].wind.deg,
-                wind_Speed: resp.data.list[i].wind.speed
+                forecastIcon: forecastIcon,
+                temp: temp,
+                temp_max: tempMax,
+                temp_min: tempMin,
+                humidity: humidity,
+                wind_Direction: wind_Direction,
+                wind_Speed: wind_Speed
             }
 
             forecastArray.push(updatedForecastObj)

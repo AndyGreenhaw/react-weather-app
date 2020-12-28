@@ -7,7 +7,7 @@ export default {
     getTodayWeather: async function(resp) {
         console.log("PRIMARY WEATHER DATA:")
         console.log(resp)
-        const cityName = resp.data.name
+        // const cityName = resp.data.name
         const todayDate = FormatDate.getDate()
         const iconImg = (require('../images/' + resp.data.weather[0].icon + '@2x.png'))
 
@@ -35,10 +35,15 @@ export default {
         const newWeatherObj = API.getUV(coordinatesOpenWeatherAPI).then( resp => {
         console.log("UV INDEX DATA:")
         console.log(resp)
+
+            // UVI NUMBER
+            const uvIndex = resp.data.value
+            const uvIndexLabel = "UVI: " + uvIndex
+
         
             // NEW WEATHER OBJECT MODEL
             const updatedWeatherObj = {
-                locationName: cityName,
+                // locationName: cityName,
                 todayDate: todayDate,
                 iconImg: iconImg, 
                 temp: tempLabel,
@@ -46,7 +51,7 @@ export default {
                 tempMin: tempMinLabel,
                 humid: humidLabel,
                 wind: windLabel,
-                uvIndex: resp.data.value
+                uvIndex: uvIndexLabel
             }
             
             // SET STATE ON WEATHER OBJECT

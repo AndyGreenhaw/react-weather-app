@@ -1,5 +1,4 @@
 {
-  "homepage": "http://andygreenhaw.github.io/react-weather-app",
   "name": "react-weather-app",
   "version": "1.0.0",
   "description": "",
@@ -21,8 +20,6 @@
     "reactstrap": "^8.7.1"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "cd client && npm run build",
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
@@ -44,5 +41,6 @@
   },
   "bugs": {
     "url": "https://github.com/AndyGreenhaw/react-weather-app/issues"
-  }
+  },
+  "homepage": "http://andygreenhaw.github.io/my-app"
 }

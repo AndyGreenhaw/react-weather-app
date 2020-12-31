@@ -8,7 +8,7 @@ export default {
         let todayFullDate = new Date();
 
         // NEW WEATHER OBJECT MODEL
-        for (var i=0; i<5;i++){
+        for (var i=0; i<7;i++){
 
             let dayName;
 
@@ -49,26 +49,38 @@ export default {
             }
 
             const forecastIcon = (require('../images/' + resp.data.daily[i].weather[0].icon + '@2x.png'))
-            const temp = resp.data.daily[i].day
-            const tempMax = resp.data.daily[i].max
-            const tempMin =  resp.data.daily[i].min
-            const humidity = resp.data.daily[i].humidity
-            const wind_Direction = resp.data.daily[i].wind_deg
-            const wind_Speed = resp.data.daily[i].wind_speed
 
-            let updatedForecastObj = {
-                _id: (i+1),
-                dayDate: dayName,
-                forecastIcon: forecastIcon,
-                temp: temp,
-                temp_max: tempMax,
-                temp_min: tempMin,
-                humidity: humidity,
-                wind_Direction: wind_Direction,
-                wind_Speed: wind_Speed
-            }
+            // SETTING DATA FOR FORECAST DISPLAYS
+            const tempMorn = Math.round(resp.data.daily[i].temp.morn)
+            const tempDay = Math.round(resp.data.daily[i].temp.day) + "°"
+            const tempEvening = Math.round(resp.data.daily[i].temp.eve)
+            const tempNight = Math.round(resp.data.daily[i].temp.night)
+            const tempMax = Math.round(resp.data.daily[i].temp.max)
+            const tempMin =  Math.round(resp.data.daily[i].temp.min)
+                        
+            const humidity = Math.round(resp.data.daily[i].humidity)
+            const wind_Direction = Math.round(resp.data.daily[i].wind_deg)
+            const wind_Speed = Math.round(resp.data.daily[i].wind_speed)
 
-            forecastArray.push(updatedForecastObj)
+
+                let updatedForecastObj = {
+                    _id: (i+1),
+                    dayDate: dayName,
+                    forecastIcon: forecastIcon,
+                    tempMorn: tempMorn,
+                    tempDay: tempDay,
+                    tempEve: tempEvening,
+                    tempNight: tempNight,
+                    temp_max: tempMax,
+                    temp_min: tempMin,
+                    humidity: humidity,
+                    wind_Direction: wind_Direction,
+                    wind_Speed: wind_Speed,
+
+                }
+                console.log(updatedForecastObj)
+                forecastArray.push(updatedForecastObj)
+            // }
         }
 
         // console.log(forecastArray)

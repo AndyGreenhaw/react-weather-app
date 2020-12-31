@@ -1,8 +1,8 @@
 export default {
 
     getHourlyArray: function (resp){
-        console.log("HOURLY RAW DATA:")
-        console.log(resp.data.hourly)
+         console.log(resp.data.hourly)
+        
 
         let hourlyArray = [];
 
@@ -13,10 +13,17 @@ export default {
             let unixTimeStamp = resp.data.hourly[i].dt
             let fullDate = new Date(unixTimeStamp * 1000);
             let allHours = fullDate.getHours()
+            let formattedTime
 
-            var formattedTime = allHours + ':' + "00";
-
-            console.log(formattedTime);
+            if(allHours > 0 && allHours < 12){
+                formattedTime = allHours + " am"
+            } else if (allHours === 12){
+                formattedTime = "12 pm"
+            } else if (allHours === 0){
+                formattedTime = "12 am"
+            } else {
+                formattedTime = (allHours-12) + " pm";
+            }
 
             const forecastIcon = (require('../images/' + resp.data.hourly[i].weather[0].icon + '@2x.png'))
             const temp = resp.data.hourly[i].temp
@@ -24,7 +31,7 @@ export default {
             const wind_Direction = resp.data.hourly[i].wind_deg
             const wind_Speed = resp.data.hourly[i].wind_speed
 
-            let updatedHourlyArray = {
+            const updatedHourlyArray = {
                 _id: (i+1),
                 time: formattedTime,
                 forecastIcon: forecastIcon,

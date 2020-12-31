@@ -8,7 +8,7 @@ function HourlyWeather(props){
                 <div className="HourlyForecastBox">
                 
                     <h2>{props.dayDate}</h2>
-                    <img src={props.forecastIcon} className="hourlyForecastImg" placeholder="Forecast"></img>
+                    <img src={props.forecastIcon} className="hourlyForecastImg" alt="Hourly Weather" placeholder="Forecast"></img>
                     <p>{props.temp}</p>
                     <p>{props.humidity}</p>
                 

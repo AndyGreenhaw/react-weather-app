@@ -2,6 +2,7 @@
 import '../index.css'
 
 import React, {useState, useEffect, useLayoutEffect} from "react";
+import Nav from 'react-bootstrap/Nav'
 import { Collapse } from 'reactstrap';
 
 //IMPORT COMPONENTS
@@ -10,42 +11,68 @@ import ForecastWeather from "../components/ForecastWeather/ForecastWeather.js"
 import HourlyWeather from "../components/HourlyWeather/HourlyWeather.js"
 import TempLineGraph from "../components/LineGraphs/TempLineGraph.js"
 
+import TomorrowWeather from "../components/TomorrowWeather/TomorrowWeather.js"
+
 // IMPORT FUNCTIONS
 import API from "../utils/API.js"
-import FormatTodayWeather from "../utils/FormatWeather"
+import FormatTodayWeather from "../utils/FormatTodayWeather"
 import FormatForecast from '../utils/FormatForecast'
 import FormatLocation from '../utils/FormatLocation'
 import FormatHourly from "../utils/FormatHourly"
 
-// SEED DATA
-// import seedHours from "../seedData/introSearchInput.json"
-// console.log(seedHours)
+
+
+// IMPORT GRAPHICS
+const searchIcon = require("../images/searchIcon-small.png")
 
 // DASHBOARD STATE FUNCTIONS START
 function Dashboard() {
+
     const [searchInput, setSearchInput] = useState("Denver")
     const [weatherObj, setWeatherObject] = useState({})
     const [forecastArray, setForecastArray] = useState([])
     const [hourlyArray, setHourlyArray] = useState([])
+    const [tomorrowObj, setTomorrowObj] = useState({})
+    const [satWeather, setSatWeather] = useState ({})
+    const [sunWeather, setSunWeather] = useState ({})
     
     // COLLAPSIBLE OPTIONS
+    const [todayIsOpen, setTodayIsOpen] = useState(true);
+    const toggleToday = () => {
+        setTodayIsOpen(true);
+        setDailyIsOpen(false)
+        setHourlyIsOpen(false)
+    }
+    
     const [dailyIsOpen, setDailyIsOpen] = useState(false);
-    const toggleDaily = () => {setDailyIsOpen(!dailyIsOpen);}
+    const toggleDaily = () => {
+        setDailyIsOpen(true);
+        setTodayIsOpen(false);
+        setHourlyIsOpen(false)
+    }
 
     const [hourlyIsOpen, setHourlyIsOpen] = useState(false);
-    const toggleHourly = () => {setHourlyIsOpen(!hourlyIsOpen);}
+    const toggleHourly = () => {
+        setHourlyIsOpen(true);
+        setTodayIsOpen(false);
+        setDailyIsOpen(false)
+    }
 
-    // // USE EFFECT: LOAD DENVER
-    // useLayoutEffect(() => {
-    //     setHourlyArray(seedHours)
-    // }, [])
+    // USE EFFECT: LOAD DENVER
+    useLayoutEffect(() => {
+        setSearchInput("")
+        submitSearch()
+        
+    }, [])
 
-    // useEffect(() => {
-    //     // submitSearch()
-    // }, [])
+    useEffect(() => {
+        setSearchInput("")
+    }, [])
 
-    console.log("WATCH WHEN THIS CHANGES")
-    console.log(hourlyArray)
+
+
+    // console.log("WATCH WHEN THIS CHANGES")
+    // console.log(hourlyArray)
       
     // HANDLE INPUT CHANGE
     function handleInputChange(e) {
@@ -58,9 +85,12 @@ function Dashboard() {
 
         FormatLocation.getLocation(searchInput).then(locationObj => {
 
-            const formattedAddress = locationObj.formattedAddress
+            // FORMAT AJAX URL'S
             const ajaxForecastURL = locationObj.ajaxOneCallURL
             const ajaxRequestURL = locationObj.ajaxRequestURL
+
+            // FORMAT ADDRESS DISPLAY
+            const formattedAddress = locationObj.formattedAddress
 
             // API REQUEST - PRIMARY WEATHER 
             API.getWeather(ajaxRequestURL).then(resp => {
@@ -95,10 +125,23 @@ function Dashboard() {
                 const forecastArray = forecastObj.forecastArray
                 const hourlyArray = forecastObj.hourlyArray
 
-                console.log("SETTING HOURLY ARRAY")
-                console.log(hourlyArray)
+                for(let i=0;i<forecastArray.length;i++){
+                    if(forecastArray[i].dayDate==="Saturday"){
+                        console.log(forecastArray[i])
+                        const satWeather = forecastArray[i]
+                        const sunWeather = forecastArray[i+1]
+                        setSatWeather(satWeather)
+                        setSunWeather(sunWeather)
+                    }
+                }
+
+                console.log("FINAL FORECAST DATA")
+                console.log(forecastArray[0])
+                forecastArray.pop()
                 setForecastArray(forecastArray)
                 setHourlyArray(hourlyArray)
+                setTomorrowObj(forecastArray[0])
+ 
             })
 
 
@@ -108,17 +151,17 @@ function Dashboard() {
     }
     
     // START BUILDING PAGE
+    console.log(forecastArray)
     return(
-        <div className="container">
+        <div className="container-fluid background">
             <div id="head">
             </div>
-            <div className="row"> 
-                
-                <nav className="col-md-12"> 
 
-                    <h1>Search by City</h1>
+            {/* SEARCH BAR */}
+            <div className="row">            
+                <div className="col-md-12 searchBanner"> 
                     <input 
-                        id="searchInput"  name="search" placeholder="Enter City or Zip Code"
+                        id="searchInput"  name="search" placeholder="Search by City or Zip Code"
                         value={searchInput || ""}
                         onChange={handleInputChange}
                         >
@@ -126,76 +169,175 @@ function Dashboard() {
                     <button 
                         id="searchButton" type="submit"
                         onClick={submitSearch}>
-                        S
+                        <img className="searchIcon" src={searchIcon}></img>
                     </button>   
-
-                </nav>
-        
-
-                <main className="col-md-12">
-                    
-                    <MainWeather
-                        locationName={weatherObj.formattedAddress}
-                        todayDate={weatherObj.todayDate}
-                        iconImg={weatherObj.iconImg}
-                        temp={weatherObj.temp}
-                        humid={weatherObj.humid}
-                        wind={weatherObj.wind}
-                        uvIndex={weatherObj.uvIndex}>
-                    </MainWeather>
-                   
-                </main>
-
-                
-                
-                <div className="col-md-12">
-                
-                    <button onClick={toggleDaily}> 
-                        FORECAST DATA
-                    </button>
-
-                    <button onClick={toggleHourly}> 
-                        HOURLY DATA
-                    </button>
-
                 </div>
-            
-                <div className="col-md-12">
-                    <Collapse isOpen={dailyIsOpen}>
+            </div>
+
+            {/* NAVIGATION BAR */}
+            <div className="row">
+                <div className="col-md-12 navBanner">
+                    <Nav className="justify-content-center weatherNavBar" activeKey="/home" onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
+                        <Nav.Item>
+                            <Nav.Link className="navItem" onClick={toggleToday}>Today</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className="navItem" onClick={toggleHourly}>Hourly</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className="navItem" onClick={toggleDaily}>10 Day</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link className="navItem" onClick={toggleDaily}>Weekend</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                </div>
+            </div>
+        
+            {/* TODAY'S WEATHER */}
+            <div className="row">
+                <div className="col-md-12 center">
                     
+                    
+                    <main>
+                        
+                        <Collapse isOpen={todayIsOpen}>
+
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="row">
+                                        <div className="col-9">
+                                            <MainWeather
+                                                locationName={weatherObj.formattedAddress}
+                                                todayDate={weatherObj.todayDate}
+                                                description={weatherObj.description}
+                                                iconImg={weatherObj.iconImg}
+                                                temp={weatherObj.temp}
+                                                tempMax={weatherObj.tempMax}
+                                                tempMin={weatherObj.tempMin}
+                                                feelsLike={weatherObj.feelsLike}
+                                                humid={weatherObj.humid}
+                                                windSpeed={weatherObj.windSpeed}
+                                                windDirectionImage={weatherObj.windDirectionImage}
+                                                windDirection = {weatherObj.windDirection}
+                                                uvIndex={weatherObj.uvIndex}
+
+                                                /////////////////////////////
+                                                tomorrowDate={tomorrowObj.dayDate}
+                                                // description={tomorrowObj.description}
+                                                tomorrowIconImg={tomorrowObj.forecastIcon}
+                                                /////////////////////////////
+                                                tomorrowTempMorn={tomorrowObj.tempMorn}
+                                                tomorrowTempDay={tomorrowObj.tempDay}
+                                                tomorrowTempEvening={tomorrowObj.tempEve}
+                                                tomorrowTempNight={tomorrowObj.tempNight}
+                                                tomorrowTempMax={tomorrowObj.temp_max}
+                                                tomorrowTempMin={tomorrowObj.temp_min}  
+                                                tomorrowHumidity={tomorrowObj.humidity}
+                                                tomorrowWind_Direction={tomorrowObj.wind_Direction}
+                                                tomorrowWind_Speed={tomorrowObj.wind_Speed}
+                                                >
+                                            </MainWeather>
+
+                                            
+                                        </div>
+                                        <div className="col-3 tomorrowWeekendSection">
+                                            <TomorrowWeather
+                                                tomorrowDate={tomorrowObj.dayDate}
+                                                // description={tomorrowObj.description}
+                                                tomorrowIconImg={tomorrowObj.forecastIcon}
+                                                /////////////////////////////
+                                                tomorrowTempMorn={tomorrowObj.tempMorn}
+                                                tomorrowTempDay={tomorrowObj.tempDay}
+                                                tomorrowTempEvening={tomorrowObj.tempEve}
+                                                tomorrowTempNight={tomorrowObj.tempNight}
+                                                tomorrowTempMax={tomorrowObj.temp_max}
+                                                tomorrowTempMin={tomorrowObj.temp_min}  
+                                                tomorrowHumidity={tomorrowObj.humidity}
+                                                tomorrowWind_Direction={tomorrowObj.wind_Direction}
+                                                tomorrowWind_Speed={tomorrowObj.wind_Speed}
+
+                                                satIcon={satWeather.forecastIcon}
+                                                satTempMorn={satWeather.tempMorn}
+                                                satTempDay={satWeather.tempDay}
+                                                satTempEvening={satWeather.tempEve}
+                                                satTempNight={satWeather.tempNight}
+                                                satTempMax={satWeather.temp_max}
+                                                satTempMin={satWeather.temp_min}  
+                                                satHumidity={satWeather.humidity}
+                                                satWind_Direction={satWeather.wind_Direction}
+                                                satWind_Speed={satWeather.wind_Speed}
+
+                                                sunIcon={sunWeather.forecastIcon}
+                                                sunTempMorn={sunWeather.tempMorn}
+                                                sunTempDay={sunWeather.tempDay}
+                                                sunTempEvening={sunWeather.tempEve}
+                                                sunTempNight={sunWeather.tempNight}
+                                                sunTempMax={sunWeather.temp_max}
+                                                sunTempMin={sunWeather.temp_min}  
+                                                sunHumidity={sunWeather.humidity}
+                                                sunWind_Direction={sunWeather.wind_Direction}
+                                                sunWind_Speed={sunWeather.wind_Speed}
+
+                                                // weekendTempMorn={weekendWeather.tempMorn}
+                                                // weekendTempDay={weekendWeather.tempDay}
+                                                // weekendTempEvening={weekendWeather.tempEve}
+                                                // weekendTempNight={weekendWeather.tempNight}
+                                                // weekendTempMax={weekendWeather.temp_max}
+                                                // weekendTempMin={weekendWeather.temp_min}  
+                                                // weekendHumidity={weekendWeather.humidity}
+                                                // weekendWind_Direction={weekendWeather.wind_Direction}
+                                                // weekendWind_Speed={weekendWeather.wind_Speed}
+                                            >
+                                                
+                                            </TomorrowWeather>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div className="row forecastArea">  
+                                        {forecastArray.map(forecast => (
+                                            // <div className="col-1 ">
+                                            <ForecastWeather key={forecast._id} {...forecast}/>         
+                                            // </div>                   
+                                        ))}
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                            
+                        </Collapse>
+                    
+                    </main>
+                </div>
+            </div>
+                
+            {/* 10-DAY WEATHER*/}
+            <div className="row">
+                <div className="col-md-12">
+                    <Collapse isOpen={dailyIsOpen}>        
                         <div className="row">                        
                         {forecastArray.map(forecast => (
-                                <ForecastWeather key={forecast._id} {...forecast}/>                            
+                            <ForecastWeather key={forecast._id} {...forecast}/>                            
                         ))}
                         </div>
-
                     </Collapse>   
                 </div>
+            </div>
 
+            {/* HOURLY WEATHER*/}
+            <div className="row">
                 <div className="col-md-12">
                     <Collapse isOpen={hourlyIsOpen}>
 
-                        
                         <div className="col-md-12">
                             <TempLineGraph {...hourlyArray}/>
                         </div>
-                        
-                        {/* <div className="row">
-                            
-                        {
-                        hourlyArray.map(forecast => (
-                                <HourlyWeather 
-                                key={forecast._id} {...forecast}/>                            
-                        ))
-                        
-                        }
-                        </div> */}
 
                     </Collapse>   
-                </div>
-                
+                </div>      
             </div>
-            
         </div>
     )
 

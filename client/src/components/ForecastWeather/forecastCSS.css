@@ -9,6 +9,43 @@ div.col-md-3 {
     padding: 0px, -15px;
 } */
 
+/* .forecastSection {
+    margin-left:auto;
+    margin-right:auto;
+
+} */
+
+.forecastBox {
+    background-color: rgb(55,92,137);
+    border-radius: 50px;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    
+
+    width: 100%;
+    padding: 20px;
+}
+
 .dailyForecastImg {
     width: 50%;
+    /* padding-left: 10px;
+    padding-right: 10px; */
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.forecastDate {
+    font-size: 24px;
+    text-align: center;
+}
+
+.forecastTemp {
+    text-align: center;
+    margin-left: 5px;
 }

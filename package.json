@@ -1,5 +1,5 @@
 {
-  "name": "mern",
+  "homepage": "http://andygreenhaw.github.io/react-weather-app",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3001/",

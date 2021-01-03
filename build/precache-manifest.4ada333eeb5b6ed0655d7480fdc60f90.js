@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/react-weather-app/static/media/searchIcon-small.abf29e35.png"
   },
   {
-    "revision": "e2ca6541bff3a3e9f4799ee327b28c58",
-    "url": "/react-weather-app/static/media/fa-brands-400.e2ca6541.eot"
-  },
-  {
     "revision": "f075c50f89795e4cdb4d45b51f1a6800",
     "url": "/react-weather-app/static/media/fa-brands-400.f075c50f.woff2"
+  },
+  {
+    "revision": "e2ca6541bff3a3e9f4799ee327b28c58",
+    "url": "/react-weather-app/static/media/fa-brands-400.e2ca6541.eot"
   },
   {
     "revision": "ad527cc5ec23d6da66e8a1d6772ea6d3",
@@ -116,20 +116,20 @@ self.__precacheManifest = [
     "url": "/react-weather-app/static/media/fa-regular-400.3c6879c4.woff"
   },
   {
-    "revision": "49f00693b0e5d45097832ef5ea1bc541",
-    "url": "/react-weather-app/static/media/fa-regular-400.49f00693.ttf"
-  },
-  {
     "revision": "3602b7e8b2cb1462b0bef9738757ef8a",
     "url": "/react-weather-app/static/media/fa-regular-400.3602b7e8.svg"
   },
   {
-    "revision": "8ac3167427b1d5d2967646bd8f7a0587",
-    "url": "/react-weather-app/static/media/fa-solid-900.8ac31674.eot"
+    "revision": "49f00693b0e5d45097832ef5ea1bc541",
+    "url": "/react-weather-app/static/media/fa-regular-400.49f00693.ttf"
   },
   {
     "revision": "8e1ed89b6ccb8ce41faf5cb672677105",
     "url": "/react-weather-app/static/media/fa-solid-900.8e1ed89b.woff2"
+  },
+  {
+    "revision": "8ac3167427b1d5d2967646bd8f7a0587",
+    "url": "/react-weather-app/static/media/fa-solid-900.8ac31674.eot"
   },
   {
     "revision": "4451e1d86df7491dd874f2c41eee1053",
@@ -156,7 +156,7 @@ self.__precacheManifest = [
     "url": "/react-weather-app/static/media/arrow_right.8ef6a08c.svg"
   },
   {
-    "revision": "79febb41b642e93b93c01d59180a99de",
+    "revision": "3afd474b68c68d71c6119a11b24c5837",
     "url": "/react-weather-app/index.html"
   }
 ];

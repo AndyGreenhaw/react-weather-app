@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Hashrouter, Route, Switch } from "react-router-dom";
 
 // PAGE IMPORTS
 import Dashboard from "./pages/Dashboard"
@@ -16,10 +16,10 @@ import Dashboard from "./pages/Dashboard"
 function App() {
   return (
     
-    <Router>
+    <Hashrouter>
       <Route exact path = {"/"} component={Dashboard}>
       </Route>
-    </Router>
+    </Hashrouter>
     
   );
 }

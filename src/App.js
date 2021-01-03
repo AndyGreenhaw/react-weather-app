@@ -16,7 +16,7 @@ import Dashboard from "./pages/Dashboard"
 function App() {
   return (
     
-    <Router>
+    <Router basename="react-weather-app">
       <Route exact path = {"/"} component={Dashboard}>
       </Route>
     </Router>

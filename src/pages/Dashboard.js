@@ -129,6 +129,7 @@ function Dashboard() {
                     if(forecastArray[i].dayDate==="Saturday"){
                         console.log(forecastArray[i])
                         const satWeather = forecastArray[i]
+                        console.log(satWeather)
                         setSatWeather(satWeather)
 
                         if(i=6){

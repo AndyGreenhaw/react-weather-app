@@ -32,6 +32,7 @@ function TomorrowWeather(props){
                                 placeholder="Wind Direction"
                                 >
                             </img>
+                            <h2>{props.satTempDay}</h2>
                         </div>
 
                         <div className="col-6">       
@@ -41,6 +42,7 @@ function TomorrowWeather(props){
                                 placeholder="Wind Direction"
                             >
                             </img>
+                            <h2>{props.sunTempDay}</h2>
                         </div>
                     </div>
                 </div>

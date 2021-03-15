@@ -1,8 +1,8 @@
 export default {
 
     getForecastArray: function (resp){
-        console.log("FORECAST DATA:")
-        console.log(resp)
+        // console.log("FORECAST DATA:")
+        // console.log(resp)
 
         let forecastArray = [];
         let todayFullDate = new Date();
@@ -78,7 +78,7 @@ export default {
                     wind_Speed: wind_Speed,
 
                 }
-                console.log(updatedForecastObj)
+                // console.log(updatedForecastObj)
                 forecastArray.push(updatedForecastObj)
             // }
         }

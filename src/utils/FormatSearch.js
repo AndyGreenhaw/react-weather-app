@@ -18,7 +18,7 @@ export default {
     
             // console.log(ajaxCity + "," + ajaxState)
             // console.log(ajaxState)
-            console.log("read")
+            // console.log("read")
 
             switch(ajaxState){
                 case "al":
@@ -80,7 +80,7 @@ export default {
                     break;
                 case "ks":
                     ajaxRequest = (ajaxCity + ",20,840");
-                    console.log("kansas")
+                    // console.log("kansas")
                     break;
                 case "ky":
                     ajaxRequest = ajaxCity + ",21,840";
@@ -108,7 +108,7 @@ export default {
                     break;
                 case "mo":
                     ajaxRequest = ajaxCity + ",29,840";
-                    console.log("mizzou")
+                    // console.log("mizzou")
                     break;
                 case "mt":
                     ajaxRequest = ajaxCity + ",30,840";

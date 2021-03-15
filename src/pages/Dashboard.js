@@ -127,9 +127,9 @@ function Dashboard() {
 
                 for(let i=0;i<forecastArray.length;i++){
                     if(forecastArray[i].dayDate==="Saturday"){
-                        console.log(forecastArray[i])
+                        // console.log(forecastArray[i])
                         const satWeather = forecastArray[i]
-                        console.log(satWeather)
+                        // console.log(satWeather)
                         setSatWeather(satWeather)
 
                         if(i=6){
@@ -142,8 +142,8 @@ function Dashboard() {
                     }
                 }
 
-                console.log("FINAL FORECAST DATA")
-                console.log(forecastArray[0])
+                // console.log("FINAL FORECAST DATA")
+                // console.log(forecastArray[0])
                 forecastArray.pop()
                 setForecastArray(forecastArray)
                 setHourlyArray(hourlyArray)
@@ -158,7 +158,7 @@ function Dashboard() {
     }
     
     // START BUILDING PAGE
-    console.log(forecastArray)
+    // console.log(forecastArray)
     return(
         <div className="container-fluid background">
             <div id="head">

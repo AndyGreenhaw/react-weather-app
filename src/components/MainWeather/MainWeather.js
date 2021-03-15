@@ -3,7 +3,7 @@ import './mainWeatherCSS.css'
 
 function MainWeather(props){
 
-    console.log(props)
+    // console.log(props)
 
     return(
         <>

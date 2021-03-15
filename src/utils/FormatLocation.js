@@ -7,8 +7,8 @@ export default {
     getLocation: function(searchInput) {
 
         const googleKey = "AIzaSyBNW2fMFQAp6K1CYKC5sWlNVNa89rwR2eU"
-        const googlePlaceURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchInput + "&key=" + googleKey
-        console.log(googlePlaceURL)
+        const googlePlaceURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + searchInput + "&key=" + googleKey + "&sensor=true"
+        // console.log(googlePlaceURL)
 
         return axios({
             method: 'GET',
@@ -24,8 +24,8 @@ export default {
 
             const cityAndState = (cityName + ", " + stateName)
 
-            console.log("CITY AND STATE:")
-            console.log(cityAndState)
+            // console.log("CITY AND STATE:")
+            // console.log(cityAndState)
 
             const locationLat = resp.data.results[0].geometry.location.lat
             const locationLong = resp.data.results[0].geometry.location.lng

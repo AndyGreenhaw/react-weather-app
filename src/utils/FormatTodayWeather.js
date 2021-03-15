@@ -5,8 +5,8 @@ export default {
 
     // PRIMARY ELEMENTS
     getTodayWeather: async function(resp) {
-        console.log("TODAY WEATHER DATA:")
-        console.log(resp)
+        // console.log("TODAY WEATHER DATA:")
+        // console.log(resp)
         // const cityName = resp.data.name
         const todayDate = FormatDate.getDate()
         const iconImg = (require('../images/' + resp.data.weather[0].icon + '@2x.png'))
@@ -14,16 +14,16 @@ export default {
         // WEATHER DATA
         const weatherDescription = resp.data.weather[0].description
         const temp = Math.ceil(resp.data.main.temp)
-        const tempMax = resp.data.main.temp_max
-        const tempMin = resp.data.main.temp_min
+        const tempMax = Math.round(resp.data.main.temp_max)
+        const tempMin = Math.round(resp.data.main.temp_min)
         const humid = resp.data.main.humidity
-        const windSpeed = resp.data.wind.speed
+        const windSpeed = Math.round(resp.data.wind.speed)
         const feelsLike = resp.data.main.feels_like
         // const cloudiness
 
         // FORMAT WIND IMAGFE
         const windDegrees = resp.data.wind.deg;
-        console.log(windDegrees)
+        // console.log(windDegrees)
         let windDirectionImage;
         let windDirection;
 
@@ -71,8 +71,8 @@ export default {
 
         // AJAX REQUEST FOR UVI
         const newWeatherObj = API.getUV(coordinatesOpenWeatherAPI).then( resp => {
-        console.log("UV INDEX DATA:")
-        console.log(resp)
+        // console.log("UV INDEX DATA:")
+        // console.log(resp)
 
             // UVI NUMBER
             const uvIndex = resp.data.value
@@ -96,8 +96,8 @@ export default {
                 uvIndex: uvIndexLabel
             }
             
-            console.log("NEW TODAY WEATHER OBJECT")
-            console.log(updatedWeatherObj)
+            // console.log("NEW TODAY WEATHER OBJECT")
+            // console.log(updatedWeatherObj)
             // SET STATE ON WEATHER OBJECT
             return updatedWeatherObj
             

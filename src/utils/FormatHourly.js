@@ -1,7 +1,7 @@
 export default {
 
     getHourlyArray: function (resp){
-         console.log(resp.data.hourly)
+        //  console.log(resp.data.hourly)
         
 
         let hourlyArray = [];
@@ -43,7 +43,7 @@ export default {
 
             hourlyArray.push(updatedHourlyArray)
         }
-        console.log(hourlyArray[0].temp)
+        // console.log(hourlyArray[0].temp)
         return hourlyArray
         
     }

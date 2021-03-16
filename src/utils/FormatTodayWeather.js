@@ -13,7 +13,7 @@ export default {
 
         // WEATHER DATA
         const weatherDescription = resp.data.weather[0].description
-        const temp = Math.ceil(resp.data.main.temp)
+        const temp = Math.round(resp.data.main.temp)
         const tempMax = Math.round(resp.data.main.temp_max)
         const tempMin = Math.round(resp.data.main.temp_min)
         const humid = resp.data.main.humidity
@@ -67,7 +67,7 @@ export default {
 
         const humidLabel = "Humidity: " + humid + "%"
         const windDirectionLabel = windDirection + " Wind"
-        const windSpeedLabel = windSpeed + "mph"
+        const windSpeedLabel = windSpeed + " mph"
 
         // AJAX REQUEST FOR UVI
         const newWeatherObj = API.getUV(coordinatesOpenWeatherAPI).then( resp => {

@@ -1,25 +1,25 @@
 export default {
 
     getForecastArray: function (resp){
-        // console.log("FORECAST DATA:")
-        // console.log(resp)
 
         let forecastArray = [];
         let todayFullDate = new Date();
 
         // NEW WEATHER OBJECT MODEL
-        for (var i=0; i<7;i++){
+        let weather = resp.data;
+        weather.list.forEach(weatherDay => {
+        // for (var i=0; i<7;i++){
 
             let dayName;
 
-            if((todayFullDate.getDay()+1+i)<7){
+            if((todayFullDate.getDay()+1)<7){
 
-            let forecastDayName = ((todayFullDate.getDay())+1+i);
+            let forecastDayName = ((todayFullDate.getDay())+1);
             formatDays(forecastDayName)
 
             } else {
 
-            let forecastDayName = ((todayFullDate.getDay())-6+i);
+            let forecastDayName = ((todayFullDate.getDay())-6);
             formatDays(forecastDayName)
             }
 
@@ -48,23 +48,23 @@ export default {
                 }
             }
 
-            const forecastIcon = (require('../images/' + resp.data.daily[i].weather[0].icon + '@2x.png'))
+            const forecastIcon = (require('../images/' + weatherDay?.weather[0]?.icon + '@2x.png'))
 
             // SETTING DATA FOR FORECAST DISPLAYS
-            const tempMorn = Math.round(resp.data.daily[i].temp.morn)
-            const tempDay = Math.round(resp.data.daily[i].temp.day) + "°"
-            const tempEvening = Math.round(resp.data.daily[i].temp.eve)
-            const tempNight = Math.round(resp.data.daily[i].temp.night)
-            const tempMax = Math.round(resp.data.daily[i].temp.max)
-            const tempMin =  Math.round(resp.data.daily[i].temp.min)
+            const tempMorn = Math.round(weatherDay.main.temp.morn)
+            const tempDay = Math.round(weatherDay.main.temp.day) + "°"
+            const tempEvening = Math.round(weatherDay.main.temp.eve)
+            const tempNight = Math.round(weatherDay.main.temp.night)
+            const tempMax = Math.round(weatherDay.main.temp.max)
+            const tempMin =  Math.round(weatherDay.main.temp.min)
                         
-            const humidity = Math.round(resp.data.daily[i].humidity)
-            const wind_Direction = Math.round(resp.data.daily[i].wind_deg)
-            const wind_Speed = Math.round(resp.data.daily[i].wind_speed)
+            const humidity = Math.round(weatherDay.humidity)
+            const wind_Direction = Math.round(weatherDay.wind_deg)
+            const wind_Speed = Math.round(weatherDay.wind_speed)
 
 
                 let updatedForecastObj = {
-                    _id: (i+1),
+                    // _id: (i+1),
                     dayDate: dayName,
                     forecastIcon: forecastIcon,
                     tempMorn: tempMorn,
@@ -78,12 +78,10 @@ export default {
                     wind_Speed: wind_Speed,
 
                 }
-                // console.log(updatedForecastObj)
                 forecastArray.push(updatedForecastObj)
             // }
-        }
-
-        // console.log(forecastArray)
+        // }
+        })
 
         return forecastArray
     }

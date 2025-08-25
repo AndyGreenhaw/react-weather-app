@@ -2,7 +2,6 @@ import React from 'react';
 import './tomorrowWeather.css';
 
 function TomorrowWeather(props){
-    // console.log(props)
 
     return(
         <div className="col-12 rightWeatherSection">

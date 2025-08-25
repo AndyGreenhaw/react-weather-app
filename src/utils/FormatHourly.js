@@ -1,9 +1,7 @@
 export default {
 
     getHourlyArray: function (resp){
-        //  console.log(resp.data.hourly)
         
-
         let hourlyArray = [];
 
         // NEW WEATHER OBJECT MODEL
@@ -43,8 +41,6 @@ export default {
 
             hourlyArray.push(updatedHourlyArray)
         }
-        // console.log(hourlyArray[0].temp)
-        return hourlyArray
-        
+        return hourlyArray    
     }
 }

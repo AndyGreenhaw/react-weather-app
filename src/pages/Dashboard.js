@@ -60,19 +60,9 @@ function Dashboard() {
 
     // USE EFFECT: LOAD DENVER
     useLayoutEffect(() => {
-        setSearchInput("")
+        setSearchInput("Denver")
         submitSearch()
-        
     }, [])
-
-    useEffect(() => {
-        setSearchInput("")
-    }, [])
-
-
-
-    // console.log("WATCH WHEN THIS CHANGES")
-    // console.log(hourlyArray)
       
     // HANDLE INPUT CHANGE
     function handleInputChange(e) {
@@ -86,14 +76,17 @@ function Dashboard() {
         FormatLocation.getLocation(searchInput).then(locationObj => {
 
             // FORMAT AJAX URL'S
-            const ajaxForecastURL = locationObj.ajaxOneCallURL
-            const ajaxRequestURL = locationObj.ajaxRequestURL
+            const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+            const ajaxForecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&units=imperial&appid=${apiKey}`
+
+            // const ajaxForecastURL = locationObj.ajaxOneCallURL
+            // const ajaxRequestURL = locationObj.ajaxRequestURL
 
             // FORMAT ADDRESS DISPLAY
             const formattedAddress = locationObj.formattedAddress
 
             // API REQUEST - PRIMARY WEATHER 
-            API.getWeather(ajaxRequestURL).then(resp => {
+            API.getWeather(ajaxForecastURL).then(resp => {
 
                 // FORMAT WEATHER DATA INTO OBJECT
                 const newWeatherObj = FormatTodayWeather.getTodayWeather(resp)
@@ -112,7 +105,7 @@ function Dashboard() {
             API.getForecast(ajaxForecastURL).then( resp => {
                 // FORMAT FORECAST INTO OBJECT
                 const forecastArray = FormatForecast.getForecastArray(resp)
-                const hourlyArray = FormatHourly.getHourlyArray(resp)
+                // const hourlyArray = FormatHourly.getHourlyArray(resp)
 
                 const forecastObj = {}
                 forecastObj.forecastArray = forecastArray
@@ -127,9 +120,8 @@ function Dashboard() {
 
                 for(let i=0;i<forecastArray.length;i++){
                     if(forecastArray[i].dayDate==="Saturday"){
-                        // console.log(forecastArray[i])
+
                         const satWeather = forecastArray[i]
-                        // console.log(satWeather)
                         setSatWeather(satWeather)
 
                         if(i=6){
@@ -142,8 +134,6 @@ function Dashboard() {
                     }
                 }
 
-                // console.log("FINAL FORECAST DATA")
-                // console.log(forecastArray[0])
                 forecastArray.pop()
                 setForecastArray(forecastArray)
                 setHourlyArray(hourlyArray)
@@ -156,9 +146,7 @@ function Dashboard() {
         })
         
     }
-    
     // START BUILDING PAGE
-    // console.log(forecastArray)
     return(
         <div className="container-fluid background">
             <div id="head">
@@ -182,7 +170,7 @@ function Dashboard() {
             </div>
 
             {/* NAVIGATION BAR */}
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-md-12 navBanner">
                     <Nav className="justify-content-center weatherNavBar" activeKey="/home" onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
                         <Nav.Item>
@@ -199,7 +187,7 @@ function Dashboard() {
                         </Nav.Item>
                     </Nav>
                 </div>
-            </div>
+            </div> */}
         
             {/* TODAY'S WEATHER */}
             <div className="row">
@@ -286,28 +274,12 @@ function Dashboard() {
                                                 sunWind_Direction={sunWeather.wind_Direction}
                                                 sunWind_Speed={sunWeather.wind_Speed}
 
-                                                // weekendTempMorn={weekendWeather.tempMorn}
-                                                // weekendTempDay={weekendWeather.tempDay}
-                                                // weekendTempEvening={weekendWeather.tempEve}
-                                                // weekendTempNight={weekendWeather.tempNight}
-                                                // weekendTempMax={weekendWeather.temp_max}
-                                                // weekendTempMin={weekendWeather.temp_min}  
-                                                // weekendHumidity={weekendWeather.humidity}
-                                                // weekendWind_Direction={weekendWeather.wind_Direction}
-                                                // weekendWind_Speed={weekendWeather.wind_Speed}
+ 
                                             >
                                                 
                                             </TomorrowWeather>
                                             
                                         </div>
-                                    </div>
-
-                                    <div className="row forecastArea">  
-                                        {forecastArray.map(forecast => (
-                                            // <div className="col-1 ">
-                                            <ForecastWeather key={forecast._id} {...forecast}/>         
-                                            // </div>                   
-                                        ))}
                                     </div>
 
                                 </div>
@@ -323,8 +295,8 @@ function Dashboard() {
             {/* 10-DAY WEATHER*/}
             <div className="row">
                 <div className="col-md-12">
-                    <Collapse isOpen={dailyIsOpen}>        
-                        <div className="row">                        
+                    <Collapse >        
+                        <div className="row" isOpen={dailyIsOpen}>                        
                         {forecastArray.map(forecast => (
                             <ForecastWeather key={forecast._id} {...forecast}/>                            
                         ))}
@@ -334,7 +306,7 @@ function Dashboard() {
             </div>
 
             {/* HOURLY WEATHER*/}
-            <div className="row">
+            {/* <div className="row">
                 <div className="col-md-12">
                     <Collapse isOpen={hourlyIsOpen}>
 
@@ -344,7 +316,7 @@ function Dashboard() {
 
                     </Collapse>   
                 </div>      
-            </div>
+            </div> */}
         </div>
     )
 

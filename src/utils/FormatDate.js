@@ -73,7 +73,6 @@ export default {
         } 
 
     const todayDisplay = (dayName+', '+mm+' '+dd+', '+yyyy).toString();
-    // console.log(todayDisplay)
     return todayDisplay;
     }
 

@@ -5,25 +5,23 @@ export default {
 
     // PRIMARY ELEMENTS
     getTodayWeather: async function(resp) {
-        // console.log("TODAY WEATHER DATA:")
-        // console.log(resp)
+
         // const cityName = resp.data.name
         const todayDate = FormatDate.getDate()
-        const iconImg = (require('../images/' + resp.data.weather[0].icon + '@2x.png'))
+        const iconImg = (require('../images/' + resp.data.list[0]?.weather[0].icon + '@2x.png'))
 
         // WEATHER DATA
-        const weatherDescription = resp.data.weather[0].description
-        const temp = Math.round(resp.data.main.temp)
-        const tempMax = Math.round(resp.data.main.temp_max)
-        const tempMin = Math.round(resp.data.main.temp_min)
-        const humid = resp.data.main.humidity
-        const windSpeed = Math.round(resp.data.wind.speed)
-        const feelsLike = resp.data.main.feels_like
-        // const cloudiness
+        const weatherDescription = resp.data.list[0]?.weather[0].description
+        const temp = Math.round(resp.data.list[0]?.main.temp)
+        const tempMax = Math.round(resp.data.list[0]?.main.temp_max)
+        const tempMin = Math.round(resp.data.list[0]?.main.temp_min)
+        const humid = resp.data.list[0]?.main.humidity
+        const windSpeed = Math.round(resp.data.list[0]?.wind.speed)
+        const feelsLike = resp.data.list[0]?.main.feels_like
 
         // FORMAT WIND IMAGFE
-        const windDegrees = resp.data.wind.deg;
-        // console.log(windDegrees)
+        const windDegrees = resp.data.list[0]?.wind.deg;
+
         let windDirectionImage;
         let windDirection;
 
@@ -54,8 +52,8 @@ export default {
         }
 
         // UV LOCATION DATA
-        const latC = resp.data.coord.lat;
-        const lonC = resp.data.coord.lon;
+        const latC = resp.data.city.coord.lat;
+        const lonC = resp.data.city.coord.lon;
         const coordinatesOpenWeatherAPI = "https://api.openweathermap.org/data/2.5/uvi?lat=" + latC + "&lon=" + lonC + "&appid=e7d65f8500681df1e3559a6964e703f1"
         
         // WEATHER LABELS
@@ -71,8 +69,6 @@ export default {
 
         // AJAX REQUEST FOR UVI
         const newWeatherObj = API.getUV(coordinatesOpenWeatherAPI).then( resp => {
-        // console.log("UV INDEX DATA:")
-        // console.log(resp)
 
             // UVI NUMBER
             const uvIndex = resp.data.value
@@ -96,8 +92,6 @@ export default {
                 uvIndex: uvIndexLabel
             }
             
-            // console.log("NEW TODAY WEATHER OBJECT")
-            // console.log(updatedWeatherObj)
             // SET STATE ON WEATHER OBJECT
             return updatedWeatherObj
             

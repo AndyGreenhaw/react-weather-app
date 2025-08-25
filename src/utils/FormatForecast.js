@@ -1,7 +1,7 @@
 export default {
 
     getForecastArray: function (resp){
-
+console.log(resp)
         let forecastArray = [];
         let todayFullDate = new Date();
 

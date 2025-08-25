@@ -74,7 +74,7 @@ function Dashboard() {
     function submitSearch (e) {
 
         FormatLocation.getLocation(searchInput).then(locationObj => {
-
+console.log(locationObj)
             // FORMAT AJAX URL'S
             const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
             const ajaxForecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&units=imperial&appid=${apiKey}`

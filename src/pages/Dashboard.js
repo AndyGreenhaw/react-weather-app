@@ -179,43 +179,42 @@ function Dashboard() {
 
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="row">
-                                        <div className="col-9">
-                                            <MainWeather
-                                                locationName={weatherObj.cityName}
-                                                todayDate={weatherObj.todayDate}
-                                                description={weatherObj.description}
-                                                iconImg={weatherObj.iconImg}
-                                                temp={weatherObj.temp}
-                                                tempMax={weatherObj.tempMax}
-                                                tempMin={weatherObj.tempMin}
-                                                feelsLike={weatherObj.feelsLike}
-                                                humid={weatherObj.humid}
-                                                windSpeed={weatherObj.windSpeed}
-                                                windDirectionImage={weatherObj.windDirectionImage}
-                                                windDirection = {weatherObj.windDirection}
-                                                uvIndex={weatherObj.uvIndex}
 
-                                                /////////////////////////////
-                                                tomorrowDate={tomorrowObj.dayDate}
-                                                // description={tomorrowObj.description}
-                                                tomorrowIconImg={tomorrowObj.forecastIcon}
-                                                /////////////////////////////
-                                                tomorrowTempMorn={tomorrowObj.tempMorn}
-                                                tomorrowTempDay={tomorrowObj.tempDay}
-                                                tomorrowTempEvening={tomorrowObj.tempEve}
-                                                tomorrowTempNight={tomorrowObj.tempNight}
-                                                tomorrowTempMax={tomorrowObj.temp_max}
-                                                tomorrowTempMin={tomorrowObj.temp_min}  
-                                                tomorrowHumidity={tomorrowObj.humidity}
-                                                tomorrowWind_Direction={tomorrowObj.wind_Direction}
-                                                tomorrowWind_Speed={tomorrowObj.wind_Speed}
-                                                >
-                                            </MainWeather>
+                                    <MainWeather
+                                        locationName={weatherObj.locationName}
+                                        todayDate={weatherObj.todayDate}
+                                        description={weatherObj.description}
+                                        iconImg={weatherObj.iconImg}
+                                        temp={weatherObj.temp}
+                                        tempMax={weatherObj.tempMax}
+                                        tempMin={weatherObj.tempMin}
+                                        feelsLike={weatherObj.feelsLike}
+                                        humid={weatherObj.humid}
+                                        windSpeed={weatherObj.windSpeed}
+                                        windDirectionImage={weatherObj.windDirectionImage}
+                                        windDirection = {weatherObj.windDirection}
+                                        uvIndex={weatherObj.uvIndex}
+
+                                        /////////////////////////////
+                                        tomorrowDate={tomorrowObj.dayDate}
+                                        // description={tomorrowObj.description}
+                                        tomorrowIconImg={tomorrowObj.forecastIcon}
+                                        /////////////////////////////
+                                        tomorrowTempMorn={tomorrowObj.tempMorn}
+                                        tomorrowTempDay={tomorrowObj.tempDay}
+                                        tomorrowTempEvening={tomorrowObj.tempEve}
+                                        tomorrowTempNight={tomorrowObj.tempNight}
+                                        tomorrowTempMax={tomorrowObj.temp_max}
+                                        tomorrowTempMin={tomorrowObj.temp_min}  
+                                        tomorrowHumidity={tomorrowObj.humidity}
+                                        tomorrowWind_Direction={tomorrowObj.wind_Direction}
+                                        tomorrowWind_Speed={tomorrowObj.wind_Speed}
+                                        >
+                                    </MainWeather>
 
                                             
                                         </div>
-                                        <div className="col-3 tomorrowWeekendSection">
+                                        <div className="col-12 tomorrowWeekendSection">
                                             <TomorrowWeather
                                                 tomorrowDate={tomorrowObj.dayDate}
                                                 // description={tomorrowObj.description}
@@ -259,9 +258,6 @@ function Dashboard() {
                                             >
                                                 
                                             </TomorrowWeather>
-                                            
-                                        </div>
-                                    </div>
 
                                 </div>
                             </div>
@@ -294,8 +290,7 @@ function Dashboard() {
                         <div className="col-md-12">
                             <TempLineGraph {...hourlyArray}/>
                         </div>
-
-                    </Collapse>   
+                    </Collapse>
                 </div>      
             </div>
         </div>

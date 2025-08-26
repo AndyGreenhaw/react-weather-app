@@ -1,16 +1,16 @@
-.main {
-  border-radius:50px;
-  /* box-shadow: 0px 0px 15px 0px rgb(0,0,0,0.5); */
+main {
+  /* border-radius:10px;
+  box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
   color: white;
-  background-color: rgb(5,51,107);
- 
+  background-color: rgb(5,51,107); */
+  width: 100%;
+
   margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 0;
+  margin-right: 0;
   margin-bottom: 15px;
 
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 0px;
 }
 
 /* .cityDateHeader{
@@ -22,7 +22,7 @@
   font-weight: bold;
   text-align: left;
   padding-top: 50px;
-  padding-left: 50px;
+  /* padding-left: 50px; */
 }
 
 .mainDateText {
@@ -73,7 +73,7 @@
   margin-right: auto;
   /* margin-top: -10%; */
 
-  width: 50%;
+  width: 72%;
 }
 
 #weatherDescription {
@@ -81,14 +81,14 @@
   
   text-align: center;
   /* padding-left: 20%; */
-  font-size: 30px;
+  font-size: 24px;
   /* font-weight: bold; */
 }
 
 #mainTempText {
-  font-size: 150px;
+  font-size: 100px;
   /* padding-top: 15px; */
-  padding-left: 25px;
+  /* padding-left: 25px; */
   margin-bottom: -10px;
   font-weight: lighter;
   text-align: center;
@@ -125,4 +125,22 @@
 
   margin-bottom: 20px;
   box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+}
+
+@media (max-width: 480px) {
+  .mainCityText {
+    font-size: 5rem !important;
+    /* font-weight: bold; */
+    text-align: left;
+    padding-top: 10px;
+    padding-left: 0px;
+  }
+  .mainDateText {
+    font-size: 2rem;
+    text-align: left;
+    padding-left: 0px;
+  }
+  .mainThreeDataPoints {
+    margin-top: 0 !important;
+  }
 }

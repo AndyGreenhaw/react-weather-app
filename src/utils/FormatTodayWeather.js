@@ -7,6 +7,7 @@ export default (resp) => {
     // getTodayWeather: async function(resp) {
 
         const cityName = resp.data.name
+        console.log(cityName)
         const todayDate = FormatDate.getDate()
         const iconImg = (require('../images/' + resp.data.weather[0]?.icon + '@2x.png'))
 
@@ -80,8 +81,8 @@ export default (resp) => {
                 locationName: cityName,
                 todayDate: todayDate,
                 iconImg: iconImg, 
-                description: weatherDescription,
-                temp: temp,
+                description: descriptionLabel,
+                temp: tempLabel,
                 tempMax: tempMaxLabel,
                 tempMin: tempMinLabel,
                 feelsLike: feelsLikeLabel,

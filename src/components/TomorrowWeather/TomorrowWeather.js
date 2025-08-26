@@ -1,8 +1,7 @@
 import React from 'react';
 import './tomorrowWeather.css';
 
-function TomorrowWeather(props){
-console.log(props)
+function TomorrowWeather({tomorrowIconImg, satIcon, sunIcon, tomorrowTemp, satTemp, sunTemp, }){
     return(
         <div className="col-12 rightWeatherSection">
                                                         
@@ -10,13 +9,11 @@ console.log(props)
                 <div className="col-12 tomorrowBox">
                     <h2 className="boxHead">Tomorrow</h2>
                     <img id="windImage"
-                    src={props.tomorrowIconImg}
+                    src={tomorrowIconImg}
                     placeholder="Wind Direction"
                     >
                     </img>
-                    <h2>{props.tomorrowTempDay}</h2>
-                    {/* <h2>{props.tomorrowHumidity}</h2>
-                    <h2>{props.Wind_Speed}</h2> */}
+                    <h2>{tomorrowTemp}</h2>
                 </div>
             </div>
             <div className="row">
@@ -27,21 +24,21 @@ console.log(props)
                         <div className="col-6">
                             <h2>Saturday</h2>
                             <img id="windImage"
-                                src={props.satIcon}
+                                src={satIcon}
                                 placeholder="Wind Direction"
                                 >
                             </img>
-                            <h2>{props.satTempDay}</h2>
+                            <h2>{satTemp}</h2>
                         </div>
 
                         <div className="col-6">       
                             <h2>Sunday</h2>
                             <img id="windImage"
-                                src={props.sunIcon}
+                                src={sunIcon}
                                 placeholder="Wind Direction"
                             >
                             </img>
-                            <h2>{props.sunTempDay}</h2>
+                            <h2>{sunTemp}</h2>
                         </div>
                     </div>
                 </div>

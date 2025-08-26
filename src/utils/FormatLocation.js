@@ -1,10 +1,8 @@
 import axios from 'axios'
 
-const apiKey = "e7d65f8500681df1e3559a6964e703f1";
-
 export default {
 
-    getLocation: function(searchInput) {
+    getLocation: (searchInput) => {
 
     let formattedSearchinput;
 
@@ -14,6 +12,8 @@ export default {
         formattedSearchinput = searchInput
     }
     const googleKey = process.env.REACT_APP_GOOGLE_API_KEY;
+    const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
     const googlePlaceURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(formattedSearchinput)}&key=${googleKey}&sensor=true`;
 
     return axios.get(googlePlaceURL)
@@ -31,9 +31,11 @@ export default {
             const locationLong = result.geometry.location.lng;
 
             return {
-                ajaxOneCallURL: `https://api.openweathermap.org/data/2.5/onecall?lat=${locationLat}&lon=${locationLong}&exclude=minutely&units=imperial&appid=${apiKey}`,
-                ajaxRequestURL: `https://api.openweathermap.org/data/2.5/weather?lat=${locationLat}&lon=${locationLong}&units=imperial&appid=${apiKey}`,
-                ajaxForecastURL: `https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLong}&units=imperial&appid=${apiKey}`,
+                // Current Weather (Free Tier)
+                ajaxCurrentWeatherURL: `https://api.openweathermap.org/data/2.5/weather?lat=${locationLat}&lon=${locationLong}&units=imperial&appid=${apiKey}`,
+                // 5-Day / 3-Hour Forecast (Free Tier)
+                ajaxFiveDayForecastURL: `https://api.openweathermap.org/data/2.5/forecast?lat=${locationLat}&lon=${locationLong}&units=imperial&appid=${apiKey}`,
+                // One Call Replacement (Not Free — commented out or gated)
                 formattedAddress: cityAndState
             };
         });

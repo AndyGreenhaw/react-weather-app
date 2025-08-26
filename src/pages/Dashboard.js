@@ -72,76 +72,55 @@ function Dashboard() {
     
     // SUBMIT SEARCH
     function submitSearch (e) {
-
+        // FORMAT LOCATION
         FormatLocation.getLocation(searchInput).then(locationObj => {
-console.log(locationObj)
-            // FORMAT AJAX URL'S
-            const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
-            const ajaxForecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${searchInput}&units=imperial&appid=${apiKey}`
-
-            // const ajaxForecastURL = locationObj.ajaxOneCallURL
-            // const ajaxRequestURL = locationObj.ajaxRequestURL
-
-            // FORMAT ADDRESS DISPLAY
-            const formattedAddress = locationObj.formattedAddress
+            
+            // FORMAT API REQUESTS
+            const todayAPI = locationObj.ajaxCurrentWeatherURL
+            const fiveDayForecastAPI = locationObj.ajaxFiveDayForecastURL
 
             // API REQUEST - PRIMARY WEATHER 
-            API.getWeather(ajaxForecastURL).then(resp => {
+            API.getWeather(todayAPI).then(resp => {
 
                 // FORMAT WEATHER DATA INTO OBJECT
-                const newWeatherObj = FormatTodayWeather.getTodayWeather(resp)
+                const newWeatherObj = FormatTodayWeather(resp)
                 return(newWeatherObj)
 
             }).then( newWeatherObj => {
-
-                // ADD CITY/STATE NAME TO WEATHER OBJECT
-                newWeatherObj.formattedAddress = formattedAddress
-
                 // SET WEATHER
                 setWeatherObject(newWeatherObj)
             })
 
             // API REQUEST - FORECAST  
-            API.getForecast(ajaxForecastURL).then( resp => {
+            API.getForecast(fiveDayForecastAPI).then(resp => {
                 // FORMAT FORECAST INTO OBJECT
-                const forecastArray = FormatForecast.getForecastArray(resp)
+                console.log(resp.data)
+                const forecastArray = FormatForecast(resp)
                 // const hourlyArray = FormatHourly.getHourlyArray(resp)
+                
+                // const forecastObj = {}
+                // forecastObj.forecastArray = forecastArray
+                // forecastObj.hourlyArray = hourlyArray
 
-                const forecastObj = {}
-                forecastObj.forecastArray = forecastArray
-                forecastObj.hourlyArray = hourlyArray
+                return forecastArray
 
-                return forecastObj
-
-            }).then(forecastObj => {
+            }).then(forecastArray => {
                 // SET FORECAST
-                const forecastArray = forecastObj.forecastArray
-                const hourlyArray = forecastObj.hourlyArray
+                // const forecastArray = forecastObj.forecastArray
+                // const hourlyArray = forecastObj.hourlyArray
 
                 for(let i=0;i<forecastArray.length;i++){
                     if(forecastArray[i].dayDate==="Saturday"){
-
-                        const satWeather = forecastArray[i]
-                        setSatWeather(satWeather)
-
-                        if(i=6){
-                            const sunWeather = forecastArray[0]
-                            setSunWeather(sunWeather)
-                        } else {
-                            const sunWeather = forecastArray[i+1]
-                            setSunWeather(sunWeather)
-                        }
+                        setSatWeather(forecastArray[i])
+                    } else if(forecastArray[i].dayDate==="Sunday"){
+                        setSunWeather(forecastArray[i])
                     }
                 }
-
                 forecastArray.pop()
                 setForecastArray(forecastArray)
                 setHourlyArray(hourlyArray)
                 setTomorrowObj(forecastArray[0])
- 
             })
-
-
 
         })
         
@@ -170,7 +149,7 @@ console.log(locationObj)
             </div>
 
             {/* NAVIGATION BAR */}
-            {/* <div className="row">
+            <div className="row">
                 <div className="col-md-12 navBanner">
                     <Nav className="justify-content-center weatherNavBar" activeKey="/home" onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
                         <Nav.Item>
@@ -187,7 +166,7 @@ console.log(locationObj)
                         </Nav.Item>
                     </Nav>
                 </div>
-            </div> */}
+            </div>
         
             {/* TODAY'S WEATHER */}
             <div className="row">
@@ -203,7 +182,7 @@ console.log(locationObj)
                                     <div className="row">
                                         <div className="col-9">
                                             <MainWeather
-                                                locationName={weatherObj.formattedAddress}
+                                                locationName={weatherObj.cityName}
                                                 todayDate={weatherObj.todayDate}
                                                 description={weatherObj.description}
                                                 iconImg={weatherObj.iconImg}
@@ -242,6 +221,7 @@ console.log(locationObj)
                                                 // description={tomorrowObj.description}
                                                 tomorrowIconImg={tomorrowObj.forecastIcon}
                                                 /////////////////////////////
+                                                tomorrowTemp={tomorrowObj.temperature}
                                                 tomorrowTempMorn={tomorrowObj.tempMorn}
                                                 tomorrowTempDay={tomorrowObj.tempDay}
                                                 tomorrowTempEvening={tomorrowObj.tempEve}
@@ -253,6 +233,7 @@ console.log(locationObj)
                                                 tomorrowWind_Speed={tomorrowObj.wind_Speed}
 
                                                 satIcon={satWeather.forecastIcon}
+                                                satTemp={satWeather.temperature}
                                                 satTempMorn={satWeather.tempMorn}
                                                 satTempDay={satWeather.tempDay}
                                                 satTempEvening={satWeather.tempEve}
@@ -264,6 +245,7 @@ console.log(locationObj)
                                                 satWind_Speed={satWeather.wind_Speed}
 
                                                 sunIcon={sunWeather.forecastIcon}
+                                                sunTemp={satWeather.temperature}
                                                 sunTempMorn={sunWeather.tempMorn}
                                                 sunTempDay={sunWeather.tempDay}
                                                 sunTempEvening={sunWeather.tempEve}
@@ -274,7 +256,6 @@ console.log(locationObj)
                                                 sunWind_Direction={sunWeather.wind_Direction}
                                                 sunWind_Speed={sunWeather.wind_Speed}
 
- 
                                             >
                                                 
                                             </TomorrowWeather>
@@ -306,7 +287,7 @@ console.log(locationObj)
             </div>
 
             {/* HOURLY WEATHER*/}
-            {/* <div className="row">
+            <div className="row">
                 <div className="col-md-12">
                     <Collapse isOpen={hourlyIsOpen}>
 
@@ -316,7 +297,7 @@ console.log(locationObj)
 
                     </Collapse>   
                 </div>      
-            </div> */}
+            </div>
         </div>
     )
 

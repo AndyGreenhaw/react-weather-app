@@ -2,13 +2,14 @@ import React from 'react';
 import './mainWeatherCSS.css'
 
 function MainWeather(props){
+    console.log(props)
 
     return(
         <>
         
         {/* BLUE BOX */}
         <div className="row">
-
+            {/* HEADER */}
             <div className="col-8 cityDateHeader">
 
                 <div className="mainCityNameBox">
@@ -28,26 +29,17 @@ function MainWeather(props){
                             placeholder="weatherIcon">
                         </img>
                     </div>
-                    
-                
                     <div className="col-4 leftWeatherSection">
                         <h2 id="mainTempText">{props.temp}</h2>
-                    
-                        
                     </div>
-                    
                     <div className="col-4 leftWeatherSection">
                         <img id="windImage"
                         src={props.windDirectionImage}
                         placeholder="Wind Direction"
                         >
                         </img>
-                        
-                    </div>
-
-                    
+                    </div>  
                 </div>
-
                 <div className="row">
                     <div className="col-4 leftWeatherSection">
                         <h2 id="weatherDescription">{props.description}</h2>  
@@ -69,13 +61,3 @@ function MainWeather(props){
 }
 
 export default MainWeather;
-
-{/* <div className="humidBox">
-                        <h3 id="mainHumidText">{props.humid}</h3>
-                    </div>
-                    <div className="windBox">
-                        <h3 id="mainWindText">{props.wind}</h3>
-                    </div>
-                    <div className="uvIndexBox">
-                        <h3 id="mainUVText">{props.uvIndex}</h3>
-                    </div> */}     

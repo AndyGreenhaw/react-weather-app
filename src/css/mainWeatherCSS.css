@@ -1,0 +1,341 @@
+main {
+  /* border-radius:10px;
+  box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+  color: white;
+  background-color: rgb(5,51,107); */
+  width: 100%;
+
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: 0;
+
+  padding: 0px;
+
+  color: white;
+}
+
+.mainCityText {
+  font-size: 100px;
+  font-weight: bold;
+  text-align: left;
+  padding-top: 50px;
+  /* padding-left: 50px; */
+}
+
+.mainDateText {
+  font-size: 36px;
+  text-align: left;
+  padding-left: 50px;
+}
+
+/* BLUE BOX STARTS */
+
+.mainThreeDataPoints {
+  margin-top:50px;
+  /* padding-top: 50px; */
+  /* padding-bottom: 50px; */
+}
+
+.leftWeatherSection {
+  text-align: center;  
+  /* padding-top: 30px; */
+}
+
+
+.middleWeatherSection {
+  display: block;
+  /* margin-left: auto;
+  margin-right: auto; */
+  text-align: left;
+  padding-top: 40px;
+}
+
+.rightWeatherSection {
+  text-align: center;  
+  /* padding-top: 55px; */
+}
+
+.main3Headline {
+  font-weight: bolder;
+  font-size: 40px;
+  /* text-align: center; */
+}
+
+.mainIcon {
+  /* width: auto; */
+  display: block;
+
+  /* padding-top: 50px; */
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: -10%; */
+
+  width: 72%;
+}
+
+#weatherDescription {
+  text-transform: capitalize;
+  
+  text-align: center;
+  /* padding-left: 20%; */
+  font-size: 24px;
+  /* font-weight: bold; */
+}
+
+#mainTempText {
+  font-size: 100px;
+  /* padding-top: 15px; */
+  /* padding-left: 25px; */
+  margin-bottom: -10px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+#feelsLike {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#highLowTemp {
+  font-size: 30px;
+  font-weight:lighter;
+  text-align: center;
+  
+}
+
+#windImage {
+  /* padding-top: 25px; */
+  width: 40%;
+}
+
+/* #windDirection {
+  padding-top: 15px;
+  text-align: center;
+} */
+
+
+/* TOMORROW BOX */
+.tomorrowBox {
+  background-color: rgb(55,92,137);
+  border-radius: 25px;
+
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+}
+
+@media (max-width: 480px) {
+  .mainCityText {
+    font-size: 5rem !important;
+    /* font-weight: bold; */
+    text-align: left;
+    padding-top: 0px;
+    padding-left: 0px;
+    margin-top: 0px;
+    text-align: left;
+  }
+  .mainTimeText {
+    font-size: 5rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
+  .mainDateText {
+    font-size: 28px;
+    text-align: center;
+    padding-left: 0px;
+  }
+  .mainThreeDataPoints {
+    margin-top: 0 !important;
+  }
+  .mainIcon {
+    width: 100%;
+    padding-bottom: -10px;
+    margin-bottom: -30px;
+    text-align: center;
+  }
+  #weatherDescription {
+    text-transform: capitalize;
+    text-align: right;
+    font-size: 28px;
+  }
+  #mainTempText {
+    font-size: 6rem;
+    font-weight: lighter;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 0px;
+  }
+  #highLowTemp {
+    font-size: 35px;
+    font-weight:lighter;
+    text-align: left;
+    margin-left: 2px;
+  }
+  .windSection {
+    background-color: aquamarine;
+    border-radius:10px;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+    color: white;
+    background-color: rgb(5,51,107);
+    padding-top: 1rem;
+    padding-bottom: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 4px;
+    margin-right: 4px;
+  }
+  #windImage {
+    width: 2rem;
+    margin-left: 1rem;
+  }
+  #windDirection {
+    text-align: center;
+    margin-left: 2rem;
+    font-size: 28px;
+  }
+  #windSpeed {
+    text-align: right;
+    margin-right: 1rem;
+    font-size: 28px;
+    padding: 0;
+  }
+  .forecastSection {
+    background-color: aquamarine;
+    border-radius:10px;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+    color: white;
+    background-color: rgb(5,51,107) !important;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 4px;
+    margin-right: 4px;
+  }
+  .forecastDate {
+    text-align: center !important;
+    font-size: 2rem !important;
+    font-weight:400;
+    margin-bottom: 1rem;
+  }
+  .dailyForecastImg {
+    width: 7rem !important;
+    padding-bottom: -10px;
+    margin-bottom: -30px;
+    text-align: center;
+  }
+  #forecastDescription{
+    text-transform: capitalize !important;
+    text-align: center !important;
+    font-size: 28px !important;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .mainCityText {
+    font-size: 5rem !important;
+    /* font-weight: bold; */
+    text-align: left;
+    padding-top: 0px;
+    padding-left: 0px;
+    margin-top: 0px;
+    text-align: left;
+  }
+  .mainTimeText {
+    font-size: 4rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
+  .mainDateText {
+    font-size: 24px;
+    text-align: center;
+    padding-left: 0px;
+  }
+  .mainThreeDataPoints {
+    margin-top: 0 !important;
+  }
+  .mainIcon {
+    width: 100%;
+    padding-bottom: -10px;
+    margin-bottom: -30px;
+    text-align: center;
+  }
+  #weatherDescription {
+    text-transform: capitalize;
+    text-align: right;
+    font-size: 28px;
+  }
+  #mainTempText {
+    font-size: 5rem;
+    font-weight: lighter;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 0px;
+  }
+  #highLowTemp {
+    font-size: 28px !important;
+    font-weight:lighter;
+    text-align: left;
+    margin-left: 2px;
+  }
+  .windSection {
+    background-color: aquamarine;
+    border-radius:10px;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+    color: white;
+    background-color: rgb(5,51,107);
+    padding-top: 1rem;
+    padding-bottom: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 4px;
+    margin-right: 4px;
+  }
+  #windImage {
+    width: 2rem;
+    margin-left: 1rem;
+  }
+  #windDirection {
+    text-align: center;
+    margin-left: 2rem;
+    font-size: 26px;
+  }
+  #windSpeed {
+    text-align: right;
+    margin-right: 1rem;
+    font-size: 26px;
+    padding: 0;
+  }
+  .forecastSection {
+    background-color: aquamarine;
+    border-radius:10px;
+    box-shadow: 0px 0px 8px 0px rgb(0,0,0,0.5);
+    color: white;
+    background-color: rgb(5,51,107) !important;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 4px;
+    margin-right: 4px;
+  }
+  .forecastDate {
+    text-align: center !important;
+    font-size: 2rem !important;
+    font-weight:400;
+    margin-bottom: 1rem;
+  }
+  .dailyForecastImg {
+    width: 7rem !important;
+    padding-bottom: -10px;
+    margin-bottom: -30px;
+    text-align: center;
+  }
+  #forecastDescription{
+    text-transform: capitalize !important;
+    text-align: center !important;
+    font-size: 28px !important;
+    margin-top: 1rem;
+  }
+}

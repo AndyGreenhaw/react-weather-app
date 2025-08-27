@@ -1,9 +1,7 @@
 import React from 'react';
-import './mainWeatherCSS.css'
+import '../../css/mainWeatherCSS.css'
 
 function MainWeather(props){
-    console.log(props)
-
     return(
         <>
         
@@ -12,6 +10,7 @@ function MainWeather(props){
             {/* HEADER */}
             <div className="col-12 cityDateHeader">
                 <div className="mainDateBox">
+                    <h1 className="mainTimeText">{props.localTime}</h1>
                     <h2 className="mainDateText">{props.todayDate}</h2>
                 </div>
 
@@ -36,21 +35,25 @@ function MainWeather(props){
                 </div>
                 
                 <div className="row">
-                    {/* <div className="col-12 leftWeatherSection"> */}
-                        <div className='col-4'>
-                            <img id="windImage"
-                                src={props.windDirectionImage}
-                                placeholder="Wind Direction"
-                            >
-                            </img>
+                    <div className="col-12">
+                        <div className='windSection'>
+                            <div className='row'>
+                                <div className='col-2'>
+                                    <img id="windImage"
+                                        src={props.windDirectionImage}
+                                        placeholder="Wind Direction"
+                                    >
+                                    </img>
+                                </div>
+                                <div className='col-6'>
+                                    <h2 id="windDirection">{props.windDirection}</h2>
+                                </div>
+                                <div className='col-4'>
+                                    <h2 id="windSpeed">{props.windSpeed}</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div className='col-4'>
-                        <h2 id="windDirection">{props.windDirection}</h2>
-                        </div>
-                        <div className='col-4'>
-                        <h2 id="windSpeed">{props.windSpeed}</h2>
-                        </div>
-                    {/* </div> */}
+                    </div>
                 </div>
                    
 

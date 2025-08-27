@@ -94,7 +94,6 @@ function Dashboard() {
             // API REQUEST - FORECAST  
             API.getForecast(fiveDayForecastAPI).then(resp => {
                 // FORMAT FORECAST INTO OBJECT
-                console.log(resp.data)
                 const forecastArray = FormatForecast(resp)
                 // const hourlyArray = FormatHourly.getHourlyArray(resp)
                 
@@ -133,7 +132,7 @@ function Dashboard() {
 
             {/* SEARCH BAR */}
             <div className="row">            
-                <div className="col-md-12 searchBanner"> 
+                <div className="col-12 searchBanner"> 
                     <input 
                         id="searchInput"  name="search" placeholder="Search by City or Zip Code"
                         value={searchInput || ""}
@@ -170,17 +169,14 @@ function Dashboard() {
         
             {/* TODAY'S WEATHER */}
             <div className="row">
-                <div className="col-md-12 center">
-                    
-                    
-                    <main>
-                        
+                <div className="col-12 center">  
+                    <main>                     
                         <Collapse isOpen={todayIsOpen}>
-
                             <div className="row">
                                 <div className="col-12">
 
                                     <MainWeather
+                                        localTime={weatherObj.localTime}
                                         locationName={weatherObj.locationName}
                                         todayDate={weatherObj.todayDate}
                                         description={weatherObj.description}
@@ -213,58 +209,72 @@ function Dashboard() {
                                     </MainWeather>
 
                                             
-                                        </div>
-                                        <div className="col-12 tomorrowWeekendSection">
-                                            <TomorrowWeather
-                                                tomorrowDate={tomorrowObj.dayDate}
-                                                // description={tomorrowObj.description}
-                                                tomorrowIconImg={tomorrowObj.forecastIcon}
-                                                /////////////////////////////
-                                                tomorrowTemp={tomorrowObj.temperature}
-                                                tomorrowTempMorn={tomorrowObj.tempMorn}
-                                                tomorrowTempDay={tomorrowObj.tempDay}
-                                                tomorrowTempEvening={tomorrowObj.tempEve}
-                                                tomorrowTempNight={tomorrowObj.tempNight}
-                                                tomorrowTempMax={tomorrowObj.temp_max}
-                                                tomorrowTempMin={tomorrowObj.temp_min}  
-                                                tomorrowHumidity={tomorrowObj.humidity}
-                                                tomorrowWind_Direction={tomorrowObj.wind_Direction}
-                                                tomorrowWind_Speed={tomorrowObj.wind_Speed}
+                                </div>
+                                <div className="col-12 tomorrowWeekendSection">
+                                    {forecastArray.map((weatherDay, index) => (
+                                        <ForecastWeather
+                                            key={index}
+                                            dayDate={weatherDay.dayDate}
+                                            description={weatherDay.description}
+                                            temperature={weatherDay.temperature}
+                                            forecastIcon={weatherDay.forecastIcon}
+                                            weatherDescription={weatherDay.weatherDescription}
+                                            temp_max={weatherDay.temp_max}
+                                            temp_min={weatherDay.temp_min}
+                                            humidity={weatherDay.humidity}
+                                            wind_Direction={weatherDay.wind_Direction}
+                                            wind_Speed={weatherDay.wind_Speed}
+                                        />
+                                    ))}
 
-                                                satIcon={satWeather.forecastIcon}
-                                                satTemp={satWeather.temperature}
-                                                satTempMorn={satWeather.tempMorn}
-                                                satTempDay={satWeather.tempDay}
-                                                satTempEvening={satWeather.tempEve}
-                                                satTempNight={satWeather.tempNight}
-                                                satTempMax={satWeather.temp_max}
-                                                satTempMin={satWeather.temp_min}  
-                                                satHumidity={satWeather.humidity}
-                                                satWind_Direction={satWeather.wind_Direction}
-                                                satWind_Speed={satWeather.wind_Speed}
+                                    
+                                    {/* <TomorrowWeather
+                                        tomorrowDate={tomorrowObj.dayDate}
+                                        // description={tomorrowObj.description}
+                                        tomorrowIconImg={tomorrowObj.forecastIcon}
+                                        /////////////////////////////
+                                        tomorrowTemp={tomorrowObj.temperature}
+                                        tomorrowTempMorn={tomorrowObj.tempMorn}
+                                        tomorrowTempDay={tomorrowObj.tempDay}
+                                        tomorrowTempEvening={tomorrowObj.tempEve}
+                                        tomorrowTempNight={tomorrowObj.tempNight}
+                                        tomorrowTempMax={tomorrowObj.temp_max}
+                                        tomorrowTempMin={tomorrowObj.temp_min}  
+                                        tomorrowHumidity={tomorrowObj.humidity}
+                                        tomorrowWind_Direction={tomorrowObj.wind_Direction}
+                                        tomorrowWind_Speed={tomorrowObj.wind_Speed}
 
-                                                sunIcon={sunWeather.forecastIcon}
-                                                sunTemp={satWeather.temperature}
-                                                sunTempMorn={sunWeather.tempMorn}
-                                                sunTempDay={sunWeather.tempDay}
-                                                sunTempEvening={sunWeather.tempEve}
-                                                sunTempNight={sunWeather.tempNight}
-                                                sunTempMax={sunWeather.temp_max}
-                                                sunTempMin={sunWeather.temp_min}  
-                                                sunHumidity={sunWeather.humidity}
-                                                sunWind_Direction={sunWeather.wind_Direction}
-                                                sunWind_Speed={sunWeather.wind_Speed}
+                                        satIcon={satWeather.forecastIcon}
+                                        satTemp={satWeather.temperature}
+                                        satTempMorn={satWeather.tempMorn}
+                                        satTempDay={satWeather.tempDay}
+                                        satTempEvening={satWeather.tempEve}
+                                        satTempNight={satWeather.tempNight}
+                                        satTempMax={satWeather.temp_max}
+                                        satTempMin={satWeather.temp_min}  
+                                        satHumidity={satWeather.humidity}
+                                        satWind_Direction={satWeather.wind_Direction}
+                                        satWind_Speed={satWeather.wind_Speed}
 
-                                            >
-                                                
-                                            </TomorrowWeather>
+                                        sunIcon={sunWeather.forecastIcon}
+                                        sunTemp={satWeather.temperature}
+                                        sunTempMorn={sunWeather.tempMorn}
+                                        sunTempDay={sunWeather.tempDay}
+                                        sunTempEvening={sunWeather.tempEve}
+                                        sunTempNight={sunWeather.tempNight}
+                                        sunTempMax={sunWeather.temp_max}
+                                        sunTempMin={sunWeather.temp_min}  
+                                        sunHumidity={sunWeather.humidity}
+                                        sunWind_Direction={sunWeather.wind_Direction}
+                                        sunWind_Speed={sunWeather.wind_Speed}
+
+                                    >
+                                        
+                                    </TomorrowWeather> */}
 
                                 </div>
                             </div>
-                            
-                            
                         </Collapse>
-                    
                     </main>
                 </div>
             </div>
